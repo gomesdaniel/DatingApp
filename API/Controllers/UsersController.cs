@@ -6,19 +6,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController: ControllerBase
+    public class UsersController:  BaseApiController
     {
        private readonly DataContext _context;
        public UsersController(DataContext context)
        {
             _context = context;
        } 
-
+       [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsrs()
         {
